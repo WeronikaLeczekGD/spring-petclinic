@@ -25,7 +25,7 @@
     <repository>
       <id>spring-petclinic</id>
       <name>spring-petclinic</name>
-      <url>http://localhost:8081/repository/spring-petclinic/</url>
+      <url>https://github.com/WeronikaLeczekGD/spring-petclinic.git</url>
     </repository>
   </distributionManagement>
 
