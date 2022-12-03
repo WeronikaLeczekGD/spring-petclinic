@@ -6,6 +6,7 @@ plugins {
 }
 
 
+
 version = scmVersion.version
 
 apply plugin: 'java'
