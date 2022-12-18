@@ -3,6 +3,7 @@ plugins {
   id 'io.spring.dependency-management' version '1.0.13.RELEASE'
   id 'java'
   id 'pl.allegro.tech.build.axion-release' version '1.14.0'
+  id 'maven-publish'
 }
 
 
@@ -10,12 +11,16 @@ plugins {
 version = scmVersion.version
 
 apply plugin: 'java'
+apply plugin: 'maven-publish'
 
 group = 'org.springframework.samples'
 sourceCompatibility = '11'
 
 repositories {
   mavenCentral()
+  // maven {
+  //       url "https://localhost:8888/repository/maven-releases/"
+  //   }
 }
 
 ext.webjarsFontawesomeVersion = "4.7.0"
@@ -51,3 +56,36 @@ task myTask(dependsOn: build) {
         java.awt.Desktop.desktop.browse (file("$buildDir/reports/tests/test/index.html").toURI())
     }
 }
+
+
+
+
+
+
+
+
+//Define artifact upload as a separate Gradle task using maven-publish plugin
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact("$buildDir/libs/spring-petclinic-new-name-$version"+".jar") {
+                extension = 'jar'
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = "http://localhost:8888/repository/maven-releases/"
+            allowInsecureProtocol = true
+            credentials {
+                username = "$usr"
+                password = "$pwd"
+            }
+
+        }
+    }
+}
+
+

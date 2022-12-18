@@ -20,11 +20,13 @@
 
   <distributionManagement>
     <repository>
-      <id>spring-petclinic</id>
-      <name>spring-petclinic</name>
-      <url>https://github.com/WeronikaLeczekGD/spring-petclinic.git</url>
+      <id>nexus</id>
+      <name>nexus_repository</name>
+      <url>https://localhost:8888/repository/maven-snapshots/</url>
     </repository>
   </distributionManagement>
+
+
 
 
   <properties>
@@ -247,6 +249,13 @@
      -->
     </configuration>
       </plugin>
+
+<plugin>
+        <groupId>org.apache.maven.plugins:maven-deploy-plugin:3.0.0:deploy</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+
     </plugins>
   </build>
 
