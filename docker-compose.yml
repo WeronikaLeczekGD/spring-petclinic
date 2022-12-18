@@ -1,21 +1,35 @@
 version: "2.2"
 
 services:
-  postgres:
-    image: postgres:14.1
-    volumes:
-      - postgdata:/var/lib/postgresql/data
+  petclinic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
     ports:
-      - "5432:5432"
+      - 8000:8000
+      - 8080:8080
     environment:
-      - POSTGRES_PASSWORD=petclinic
-      - POSTGRES_USER=petclinic
-      - POSTGRES_DB=petclinic
-  spring-petclinic:
-    image: second_image:latest
-    ports:
-      - "8080:8080"
+      - SERVER_PORT=8080
+      - MYSQL_URL=jdbc:mysql://mysqlserver/petclinic
+    volumes:
+      - ./:/app
+    depends_on:
+      - mysqlserver
 
+  mysqlserver:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=petclinic
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_USER=petclinic
+      - MYSQL_PASSWORD=petclinic
+      - MYSQL_DATABASE=petclinic
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_config:/etc/mysql/conf.d
 volumes:
-  postgdata:
-    driver: local
+  mysql_data:
+  mysql_config:
