@@ -24,11 +24,6 @@ pipeline {
          sh 'mvn compile' //only compilation of the code
        }
     }
-    stage('Build') {
-      steps {
-        sh 'mvn package' //compilation and packaging of the code
-      }
-    }
     stage('Test') {
       steps {
         sh '''
@@ -38,6 +33,11 @@ pipeline {
         '''
         //if the code is compiled, we test and package it in its distributable format; run IT and store in local repository
       }
+    }
+    stage('Build') {
+          steps {
+            sh 'mvn package' //compilation and packaging of the code
+          }
     }
     stage('Create Docker Image') {
       steps {
@@ -56,6 +56,5 @@ pipeline {
         }
       }
     }
-
   }
 }
