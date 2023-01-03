@@ -43,10 +43,11 @@ pipeline {
         }
       }
     }
+
     stage('Push Docker Image') {
       steps {
         script {
-          docker.withRegistry( '', registryCredential ) {
+          docker.withRegistry('https://hub.docker.com/repository/docker/wleczek/mr', 'dockerhub-mr-user1') {
             dockerImage.push()
             dockerImage.push("${env.BUILD_NUMBER}")
           }
