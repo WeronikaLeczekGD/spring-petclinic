@@ -5,7 +5,7 @@ pipeline {
     dockerImage = ''
   }
   agent {
-    dockcerfile true
+    dockerfile true
   }
   tools {
     maven 'mymaven'
