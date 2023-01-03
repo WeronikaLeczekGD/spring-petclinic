@@ -8,12 +8,7 @@ pipeline {
   tools {
     maven 'mymaven'
     jdk 'Myjava'
-  dockerTools {
-    mydocker {
-      image 'docker:stable'
-      args '-v /var/run/docker.sock:/var/run/docker.sock'
-    }
-    }
+    dockerTool 'mydocker'
   }
   stages {
     stage('Cloning Git') {
