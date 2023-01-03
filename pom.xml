@@ -242,14 +242,17 @@
         <artifactId>maven-release-plugin</artifactId>
         <version>3.0.0-M7</version>
             <configuration>
-      <!--
-        During release:perform, enable the "release" profile
-       -->
-     <!-- <releaseProfiles>release</releaseProfiles>
-     -->
     </configuration>
-      </plugin>
-
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
+          </configuration>
+        </plugin>
 <plugin>
         <groupId>org.apache.maven.plugins:maven-deploy-plugin:3.0.0:deploy</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
