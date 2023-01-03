@@ -8,13 +8,7 @@ pipeline {
   tools {
     maven 'mymaven'
     jdk 'Myjava'
-  }
-dockerTools {
-    dockerfile {
-      filename 'Dockerfile'
-      label 'docker'
-      additionalBuildArgs '--build-arg JAR_FILE=target/*.jar'
-    }
+    docker 'docker'
   }
   stages {
     stage('Cloning Git') {
