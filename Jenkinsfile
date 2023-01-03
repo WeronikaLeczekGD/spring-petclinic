@@ -8,6 +8,7 @@ pipeline {
   tools {
     maven 'mymaven'
     jdk 'Myjava'
+    docker 'docker'
   }
   stages {
     stage('Cloning Git') {
