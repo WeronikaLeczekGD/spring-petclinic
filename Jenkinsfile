@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git 'https://github.com/WeronikaLeczekGD/spring-petclinic'
+        git branch: 'main', credentialsId: 'github-mr-user1', url: 'https://github.com/WeronikaLeczekGD/spring-petclinic'
       }
     }
   stage('Checkstyle') {
