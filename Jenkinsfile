@@ -4,7 +4,9 @@ pipeline {
     registryCredential = 'docker-hub'
     dockerImage = ''
   }
-  agent any
+  agent {
+    dockcerfile true
+  }
   tools {
     maven 'mymaven'
     jdk 'Myjava'
@@ -36,10 +38,10 @@ pipeline {
             sh 'mvn package' //compilation and packaging of the code
           }
     }
-    stage('Create Docker Image') {
+    stage('Docker Build') {
       steps {
         script {
-          dockerImage = docker.build registry + ":${env.BUILD_NUMBER}"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
