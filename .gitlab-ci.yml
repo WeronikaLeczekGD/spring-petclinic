@@ -6,7 +6,7 @@ cache:
 
 maven-chechstyle:
   stage: Checkstyle
-  script: mvn checkstyle:check
+  script: mvn checkstyle:checkstyle
 
 maven-test:
   stage: Test
