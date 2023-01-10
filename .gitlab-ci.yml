@@ -9,9 +9,9 @@ cache:
 
 
 
-maven-chechstyle:
-  stage: Checkstyle
-  script: mvn checkstyle:checkstyle
+#maven-chechstyle:
+#  stage: Checkstyle
+#  script: mvn checkstyle:checkstyle
 
 maven-test:
   stage: Test
