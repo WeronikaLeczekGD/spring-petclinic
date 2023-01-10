@@ -1,8 +1,13 @@
 image: maven:3.8.5-openjdk-17
 
+include:
+  - template: Dependency-Scanning.gitlab-ci.yml
+
 cache:
   paths:
     - ~/.m2/repository/
+
+
 
 maven-chechstyle:
   stage: Checkstyle
@@ -26,6 +31,4 @@ docker-build:
     - docker build -t wleczek/mr:$CI_COMMIT_SHORT_SHA .  #repository mr
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY #When a pipeline job is about to run, GitLab generates a unique token and injects it as the CI_JOB_TOKEN predefined variable.
     - docker push wleczek/mr:$CI_COMMIT_SHORT_SHA
-
-
 
