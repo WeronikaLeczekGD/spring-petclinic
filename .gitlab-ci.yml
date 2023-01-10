@@ -1,0 +1,31 @@
+image: maven:3.8.5-openjdk-17
+
+cache:
+  paths:
+    - ~/.m2/repository/
+
+maven-chechstyle:
+  stage: Checkstyle
+  script: mvn checkstyle:check
+
+maven-test:
+  stage: Test
+  script: mvn test
+
+maven-build:
+    stage: Build
+    script: mvn package -DskipTests=true
+
+
+docker-build:
+  stage: Build Docker Image
+  image: docker:20.10.16
+  services:
+    - docker:dind
+  script:
+    - docker build -t wleczek/mr:$CI_COMMIT_SHORT_SHA .  #repository mr
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY #When a pipeline job is about to run, GitLab generates a unique token and injects it as the CI_JOB_TOKEN predefined variable.
+    - docker push wleczek/mr:$CI_COMMIT_SHORT_SHA
+
+
+
