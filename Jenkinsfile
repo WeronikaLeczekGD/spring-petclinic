@@ -22,7 +22,7 @@ pipeline {
        }
     stage('Compile') {
        steps {
-         sh 'mvn compile' //only compilation of the code
+         sh 'mvn compile'
        }
     }
     stage('Test')
@@ -33,7 +33,7 @@ pipeline {
     }
     stage('Build') {
           steps {
-            sh 'mvn package' //compilation and packaging of the code
+            sh 'mvn package'
           }
     }
     stage('Docker Build') {
