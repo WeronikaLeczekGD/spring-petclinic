@@ -6,6 +6,28 @@ cache:
 stages:          # List of stages for jobs, and their order of execution
   - build
   - deploy
+  - test
+  - check
+
+
+maven-check:
+  stage: check
+  image: maven:3.6.3-jdk-11
+  script:
+    - mvn checkstyle:checkstyle
+  artifacts:
+    paths:
+      - target/
+
+.maven-test:
+    stage: test
+    image: maven:3.6.3-jdk-11
+    script:
+        - mvn test
+    artifacts:
+        paths:
+        - target/
+
 
 maven-build-job:       # This job runs in the build stage, which runs first.
   stage: build
@@ -24,7 +46,7 @@ deploy-job:      # This job runs in the deploy stage.
     - name: docker:dind
   script:
    - docker build -t wleczek/mr:$CI_COMMIT_SHORT_SHA .  #repository mr
-   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY #When a pipeline job is about to run, GitLab generates a unique token and injects it as the CI_JOB_TOKEN predefined variable.
+   - docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN $CI_REGISTRY #When a pipeline job is about to run, GitLab generates a unique token and injects it as the CI_JOB_TOKEN predefined variable.
    - docker push wleczek/mr:$CI_COMMIT_SHORT_SHA
 
 
