@@ -4,13 +4,19 @@ cache:
     - ~/.m2/repository/
 
 stages:          # List of stages for jobs, and their order of execution
+  - login
   - check
   - test
   - build
   - deploy
 
 
-
+login-job:       # Job name
+  stage: login   # Stage name
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 maven-check:
   stage: check
