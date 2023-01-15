@@ -50,7 +50,7 @@ deploy-job:      # This job runs in the deploy stage.
   services:
     - name: docker:dind
   script:
-   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+   - docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
    - docker build -t wleczek/mr:latest .
    - docker push wleczek/mr:latest
 
