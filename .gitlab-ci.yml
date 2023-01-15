@@ -8,30 +8,30 @@ stages:          # List of stages for jobs, and their order of execution
   - deploy
 
 
-#login-job:       # Job name
-#  stage: login   # Stage name
-#  services:
-#    - docker:dind
-#  script:
-#    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#
-#maven-check:
-#  stage: check
-#  image: maven:3.6.3-jdk-11
-#  script:
-#    - mvn checkstyle:checkstyle
-#  artifacts:
-#    paths:
-#      - target/
-#
-#maven-test-job:
-#    stage: test
-#    image: maven:3.6.3-jdk-11
-#    script:
-#        - mvn test
-#    artifacts:
-#        paths:
-#        - target/
+login-job:       # Job name
+  stage: login   # Stage name
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+maven-check:
+  stage: check
+  image: maven:3.6.3-jdk-11
+  script:
+    - mvn checkstyle:checkstyle
+  artifacts:
+    paths:
+      - target/
+
+maven-test-job:
+    stage: test
+    image: maven:3.6.3-jdk-11
+    script:
+        - mvn test
+    artifacts:
+        paths:
+        - target/
 
 
 maven-build-job:       # This job runs in the build stage, which runs first.
