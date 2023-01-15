@@ -4,9 +4,6 @@ cache:
     - ~/.m2/repository/
 
 stages:          # List of stages for jobs, and their order of execution
-  - login
-  - check
-  - test
   - build
   - deploy
 
@@ -53,9 +50,9 @@ deploy-job:      # This job runs in the deploy stage.
   services:
     - name: docker:dind
   script:
-   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-   - docker build -t wleczek/mr:$CI_COMMIT_SHORT_SHA .
-   - docker push wleczek/mr:$CI_COMMIT_SHORT_SHA
+   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+   - docker build -t wleczek/mr:latest .
+   - docker push wleczek/mr:latest
 
 
 
